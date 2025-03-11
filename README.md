@@ -17,7 +17,7 @@ npm run dev
 npm run build
 
 # 克隆项目
-git clone https://github.com/gg3081779049/Easy-Admin.git
+git clone https://github.com/gg3081779049/easy-admin.git
 ```
 
 **目录结构**
