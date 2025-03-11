@@ -1,0 +1,61 @@
+<template>
+    <el-collapse-transition>
+        <el-form ref="queryForm" class="query-form" v-bind="$attrs" v-if="show" inline>
+            <slot />
+            <el-form-item>
+                <easy-button type="primary" i="search" :t="$t('common.search')" plain @click="search" />
+                <easy-button i="refresh" :t="$t('common.reset')" v-on-click-rotate plain @click="reset" />
+            </el-form-item>
+        </el-form>
+    </el-collapse-transition>
+</template>
+
+<script>
+export default {
+    name: 'QueryForm',
+    props: {
+        show: {
+            type: Boolean,
+            default: true
+        }
+    },
+    methods: {
+        search() {
+            this.$emit('search')
+        },
+        reset() {
+            this.$refs['queryForm']?.resetFields()
+            this.$emit('reset')
+        }
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.query-form {
+    padding: 14px;
+    border-bottom: 0.8px solid var(--el-border-color-lighter);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+
+    &::v-deep {
+        .el-form-item {
+            min-width: 300px;
+            margin: 0;
+
+            &:last-child {
+                width: auto;
+                min-width: initial;
+                margin-left: auto;
+            }
+
+            .query-form-item,
+            .el-input,
+            .el-date-editor {
+                width: 200px;
+            }
+        }
+    }
+}
+</style>

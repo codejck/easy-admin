@@ -1,0 +1,5 @@
+<svg viewBox="0 0 960 640" xmlns="http://www.w3.org/2000/svg">
+    <rect x="60" y="60" rx="30" width="840" height="160" fill="var(--el-color-primary-light-3)" />
+    <rect x="60" y="280" rx="30" width="180" height="300" fill="var(--el-color-primary-light-5)" />
+    <rect x="300" y="280" rx="30" width="600" height="300" fill="var(--el-color-primary-light-7)" />
+</svg>

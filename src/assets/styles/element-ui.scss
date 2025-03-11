@@ -1,0 +1,44 @@
+.el-dropdown__popper li {
+    svg {
+        color: var(--el-text-color-regular);
+    }
+
+    &:hover svg,
+    &:focus svg {
+        color: var(--el-dropdown-menuItem-hover-color);
+    }
+}
+
+.el-dialog {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+.el-table {
+    .el-checkbox__inner {
+        background: transparent;
+    }
+
+    .el-table__header-wrapper tr th.el-table-fixed-column--right {
+        background: var(--el-fill-color-lighter);
+    }
+}
+
+.el-container {
+    .el-header {
+        padding: 0;
+    }
+
+    .el-main {
+        padding: 0;
+    }
+}
+
+.el-menu {
+    &.el-menu--popup:empty {
+        display: none;
+    }
+}
