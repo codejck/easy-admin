@@ -19,7 +19,7 @@
         </el-input>
       </el-form-item>
       <el-form-item v-if="captcha">
-        <captcha ref="captchaRef" type="pick" @success="handleLogin" @failure="loading = false" />
+        <captcha ref="captchaRef" type="pick" @success="handleLogin" />
       </el-form-item>
       <div class="box">
         <el-checkbox v-model="loginForm.rememberMe">
@@ -47,6 +47,7 @@ import Cookies from "js-cookie"
 import { encrypt, decrypt } from '@/utils/jsencrypt'
 import { useAppStore } from '@/store/modules/app'
 import { useUserStore } from '@/store/modules/user'
+import { mapState } from 'pinia'
 
 import SystemLogo from '@/components/SystemLogo'
 import Captcha from '@/components/Captcha'
@@ -57,7 +58,6 @@ export default {
   components: { SystemLogo, Captcha, LangSelect },
   data() {
     return {
-      title: useAppStore().title,
       img: "",
       uuid: "",
       loginForm: {
@@ -78,6 +78,10 @@ export default {
   },
   created() {
     this.getCookie()
+  },
+  computed: {
+    ...mapState(useAppStore, ['title']),
+    ...mapState(useUserStore, ['name', 'nickname'])
   },
   methods: {
     getCookie() {
@@ -101,7 +105,7 @@ export default {
         }
       })
     },
-    handleLogin() {
+    async handleLogin() {
       if (this.loginForm.rememberMe) {
         Cookies.set("username", this.loginForm.username, { expires: 30 })
         Cookies.set("password", encrypt(this.loginForm.password), { expires: 30 })
@@ -111,19 +115,18 @@ export default {
         Cookies.remove("password")
         Cookies.remove('rememberMe')
       }
-      useUserStore().Login(this.loginForm).then(() => {
+      try {
+        this.loading = true
+        await useUserStore().login(this.loginForm)
+        this.loading = false
         let loginSuccess = this.$t('message.loginSuccess')
         let welcomeBack = this.$t('message.welcomeBack')
-        this.$router.push({ path: this.$route.query?.redirect || "/" }).then(() => {
-          this.$notify.success({
-            title: loginSuccess,
-            message: `${welcomeBack}, ${useUserStore().nickname || useUserStore().name} !`
-          })
-        }).catch(() => { })
-      }).catch(() => {
+        await this.$router.push({ path: this.$route.query?.redirect || "/" })
+        this.$notify.success({ title: loginSuccess, message: `${welcomeBack}, ${this.nickname || this.name} !` })
+      } catch (error) {
         this.loading = false
         this.$refs?.captchaRef?.open?.()
-      })
+      }
     }
   }
 }
@@ -163,16 +166,14 @@ export default {
     .logo-container {
       margin-bottom: 25px;
 
-      ::v-deep {
-        svg {
-          width: 32px;
-          height: 32px;
-        }
+      :deep(svg) {
+        width: 32px;
+        height: 32px;
+      }
 
-        h1 {
-          width: 96px;
-          font-size: 15px;
-        }
+      :deep(h1) {
+        width: 96px;
+        font-size: 15px;
       }
     }
 

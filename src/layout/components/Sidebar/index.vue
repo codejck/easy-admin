@@ -30,7 +30,7 @@ export default {
         position: relative;
         transition: width 0.28s;
 
-        ::v-deep .el-menu {
+        :deep(.el-menu) {
             --el-menu-bg-color: var(--sidebar-menu-bg);
             --el-menu-border-color: var(--sidebar-menu-bg);
             --el-menu-item-height: v-bind('`${sidebarItemHeight}px`');

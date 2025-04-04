@@ -7,7 +7,7 @@
                 </template>
             </el-input>
         </template>
-        <div class="icon-select">
+        <div class="icon-select-container">
             <el-input class="icon-search" v-model="name" clearable :placeholder="$t('placeholder.enterIconName')"
                 @clear="filterIcons" @input="filterIcons">
                 <template #suffix>
@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icon-select {
+.icon-select-container {
     width: 100%;
     padding-bottom: 8px;
     box-sizing: border-box;
@@ -78,7 +78,7 @@ export default {
         margin: 8px;
         position: relative;
 
-        ::v-deep .el-input__wrapper {
+        :deep(.el-input__wrapper) {
             background-color: transparent;
         }
 
@@ -87,7 +87,7 @@ export default {
         }
     }
 
-    ::v-deep .el-scrollbar {
+    :deep(.el-scrollbar) {
         height: 100%;
         overflow: visible;
 

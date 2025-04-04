@@ -13,7 +13,7 @@ import { ElNotification, ElLoading } from 'element-plus'
 export let isRelogin = { show: false }
 
 // 错误码
-const errorCode = $tm('message.error')
+const errorCode = $tm('state')
 
 // 设置axios默认请求头
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
@@ -92,7 +92,7 @@ service.interceptors.response.use(res => {
                 type: 'warning',
             }).then(() => {
                 isRelogin.show = false
-                useUserStore().Logout().then(() => {
+                useUserStore().logout().then(() => {
                     location.href = '/'
                 })
             }).catch(() => {
@@ -134,7 +134,7 @@ export async function download(url, params, filename, config) {
     downloadLoadingInstance = ElLoading.service({ text: $t('message.downloading'), background: 'rgba(0, 0, 0, 0.7)' })
     try {
         const data = await service.post(url, params, {
-            transformRequest: [(params_1) => tansParams(params_1)],
+            transformRequest: [(params) => tansParams(params)],
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             responseType: 'blob',
             ...config

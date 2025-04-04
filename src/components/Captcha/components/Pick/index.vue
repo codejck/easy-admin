@@ -3,9 +3,9 @@
         <div :class="{ 'el-overlay': appendToBody }" v-if="visible" @click="clickOverlay">
             <div class="captcha-pick">
                 <h3 class="captcha-header">
-                    {{ $t('toolTip.validate') }}
+                    {{ $t('common.validate') }}
                     <div class="flex">
-                        <el-button link v-on-click-rotate v-prevent-reclick="500" :title="$t('toolTip.refresh')">
+                        <el-button link v-on-click-rotate v-prevent-reclick="500" :title="$t('common.refresh')">
                             <svg-icon icon="refresh" @click="refresh" />
                         </el-button>
                         <easy-button type="primary" :t="$t('common.confirm')" size="small" @click="validate" />

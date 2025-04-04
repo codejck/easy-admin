@@ -1,5 +1,5 @@
 <template>
-  <el-drawer class="drawer-container" size="320" :title="$t('operation.configuration')" append-to-body>
+  <el-drawer class="drawer-container" size="320" :title="$t('common.configuration')" append-to-body>
     <el-scrollbar style="height:calc(100% - 52.8px)">
       <el-collapse>
         <el-collapse-item :title="$t('settings.title.system')">

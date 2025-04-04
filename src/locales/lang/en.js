@@ -2,6 +2,7 @@ import en from 'element-plus/es/locale/lang/en'
 
 export default {
     ...en,
+    dict: {},
     'system': {
         'title': 'Easy-Admin',
         'copyright': 'Copyright © 2024 Easy-Admin All Rights Reserved.',
@@ -13,6 +14,7 @@ export default {
         'systemTip': 'System Tip',
         'backHome': 'Back Home',
         'relogin': 'Relogin',
+        'logout': 'Logout',
         'confirm': 'Confirm',
         'cancel': 'Cancel',
         'search': 'Search',
@@ -22,19 +24,16 @@ export default {
         'delete': 'Delete',
         'export': 'Export',
         'update': 'Update',
-        'drag': 'Drag'
-    },
-    'toolTip': {
+        'drag': 'Drag',
+        'operation': 'Operation',
+        'refresh': 'Refresh',
         'expand': 'Expand',
         'collapse': 'Collapse',
         'fullscreen': 'Fullscreen',
         'exitFullscreen': 'Exit Fullscreen',
-        'showSearchBar': 'Show Search Bar',
-        'hiddenSearchBar': 'Hidden Search Bar',
-        'columnSetting': 'Column Setting',
-        'print': 'Print',
-        'refresh': 'Refresh',
-        'validate': 'Please Complete Security Verification'
+        'validate': 'Please Complete Security Verification',
+        'userCenter': 'User Center',
+        'configuration': 'Configuration',
     },
     'placeholder': {
         "captcha": "Please enter the correct captcha",
@@ -48,9 +47,6 @@ export default {
         'closeLeft': 'Close Left',
         'closeRight': 'Close Right',
         'closeAll': 'Close All',
-        'userCenter': 'User Center',
-        'configuration': 'Configuration',
-        'logout': 'Logout',
         'save': 'Save',
         'reset': 'Restore'
     },
@@ -79,12 +75,12 @@ export default {
         'unsupportFullscreen': 'Your browser does not support full screen display',
         'saving': 'Saving to local, please wait...',
         'reseting': 'Clearing settings, please wait...',
-        'error': {
-            '401': 'The authentication fails and the system resources cannot be accessed',
-            '403': 'The current operation does not have permissions',
-            '404': 'The access resource does not exist',
-            'default': 'System Unknown Error'
-        }
+    },
+    'state': {
+        '401': 'The authentication fails and the system resources cannot be accessed',
+        '403': 'The current operation does not have permissions',
+        '404': 'The access resource does not exist',
+        'default': 'System Unknown Error'
     },
     'settings': {
         'title': {
@@ -163,6 +159,7 @@ export default {
                     'button': 'Button',
                     'line': 'Line',
                     'chrome': 'Chrome',
+                    'trape': 'Trape'
                 }
             },
             'showTabs': {
@@ -220,25 +217,5 @@ export default {
                 }
             }
         }
-    },
-    'route': {
-        'home': 'Home',
-        'document': 'Document',
-        'element': 'Element-Plus',
-        'pinia': 'Pinia',
-        'vue': 'Vue',
-        'components': 'Components',
-        'dialog': 'Dialog',
-        'auth': 'Auth',
-        'menu': 'Menu',
-        'role': 'Role',
-        'error': 'Exception',
-        '401': '401',
-        '404': '404',
-        'system': 'System',
-        'systemTool': 'SystemTool',
-        'gen': 'Generate',
-        'user': 'User',
-        'about': 'About'
     }
 }

@@ -34,14 +34,12 @@ git clone https://github.com/gg3081779049/easy-admin.git
 │   ├── api  接口api
 │   ├── assets  静态文件
 │   │   ├── images  图片文件
-│   │   ├── gif  gif文件
 │   │   ├── styles  全局的样式文件
 │   │   └── svg  全局svg文件
 │   │       ├── icons  普通图标
 │   │       ├── menu  菜单图标
 │   │       ├── layout  布局图标
 │   │       ├── state  http状态图标
-│   │       ├── svgo.yml  svg配置文件
 │   │       └── index.js  导入所有图标文件
 │   ├── components  通用组件和业务的组件
 │   ├── directive  指令

@@ -1,11 +1,11 @@
 <template>
     <div class="tabs-toolbar">
-        <el-tooltip :content="$t('toolTip.refresh')" effect="light" :show-after="600">
+        <el-tooltip :content="$t('common.refresh')" effect="light" :show-after="600">
             <div class="refresh" v-on-click-rotate @click="isRefresh = true">
                 <svg-icon icon="refresh" aria-hidden="false" />
             </div>
         </el-tooltip>
-        <el-tooltip :content="$t(`toolTip.${tabFullscreen ? 'exitFullscreen' : 'fullscreen'}`)" effect="light"
+        <el-tooltip :content="$t(`common.${tabFullscreen ? 'exitFullscreen' : 'fullscreen'}`)" effect="light"
             :show-after="600">
             <svg-icon :icon="tabFullscreen ? 'fullscreen-exit' : 'fullscreen'" aria-hidden="false"
                 @click="tabFullscreen = !tabFullscreen" />

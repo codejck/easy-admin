@@ -88,7 +88,7 @@ export default {
 .captcha-image {
     height: 36px;
 
-    &::v-deep .el-input-group__append {
+    :deep(.el-input-group__append) {
         height: 100%;
         padding: 0 2px;
         overflow: hidden;

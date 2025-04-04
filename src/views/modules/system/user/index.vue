@@ -1,11 +1,9 @@
 <template>
-  <div class="app-card" :style="{ height: `calc(100vh - ${!tabFullscreen * headerHeight + showTabs * tabsHeight + 40}px)` }">
-    <h3 class="header p14">
-      {{ $t('route.user') }}
-    </h3>
+  <div class="app-card">
+    <h3 class="header p14">{{ $route.meta.title }}</h3>
     <div class="body">
       <div class="aside">
-        <div :class="['menu-item', { 'activeItem' : i === activeIndex }]" v-for="(item, i) in menuList" :key="item"
+        <div :class="['menu-item', { 'activeItem': i === activeIndex }]" v-for="(item, i) in menuList" :key="item"
           @click="activeIndex = i">
           <svg-icon :icon="item.icon" />
           <span>{{ $t(item.title) }}</span>
@@ -24,10 +22,6 @@
 <i18n locale="zh" src="./locales/zh.json"></i18n>
 
 <script>
-import { useAppStore } from '@/store/modules/app'
-import { useSettingsStore } from '@/store/modules/settings'
-import { mapState } from 'pinia'
-
 import BaseInfo from './components/BaseInfo'
 import ResetPwd from './components/ResetPwd'
 import LoginLog from './components/LoginLog'
@@ -39,38 +33,39 @@ export default {
     return {
       activeIndex: 0,
       menuList: [
-      { title: "基本设置", icon: "user", component: 'BaseInfo' },
-      { title: "密码设置", icon: "lock", component: 'ResetPwd' },
-      { title: "登录日志", icon: "log", component: 'LoginLog' },
+        { title: "基本设置", icon: "user", component: 'BaseInfo' },
+        { title: "密码设置", icon: "lock", component: 'ResetPwd' },
+        { title: "登录日志", icon: "log", component: 'LoginLog' },
       ]
     }
-  },
-  computed: {
-    ...mapState(useAppStore, ["tabFullscreen"]),
-    ...mapState(useSettingsStore, ["headerHeight", "tabsHeight", "showTabs"])
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .app-card {
+  height: calc(var(--main-height) - 40px);
   margin: 20px;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+
   .header {
     padding-left: 20px;
     border-bottom: 1px solid var(--el-border-color-light);
     color: var(--el-text-color-regular);
   }
+
   .body {
     height: 100%;
     display: flex;
     overflow: hidden;
+
     .aside {
       width: 200px;
       padding: 16px;
       border-right: 1px solid var(--el-border-color);
+
       .menu-item {
         height: 36px;
         padding-left: 9px;
@@ -90,19 +85,21 @@ export default {
         &:hover {
           background: rgba(128, 128, 128, 0.08);
         }
+
         &.activeItem {
-          background: hsla(
-            var(--el-color-primary-h),
-            calc(var(--el-color-primary-s) * 1%),
-            calc(var(--el-color-primary-l) * 1%), 0.08);
-          
+          background: hsla(var(--el-color-primary-h),
+              calc(var(--el-color-primary-s) * 1%),
+              calc(var(--el-color-primary-l) * 1%), 0.08);
+
           color: var(--el-color-primary);
+
           svg {
             color: var(--el-color-primary);
           }
         }
       }
     }
+
     .main {
       width: 100%;
       padding: 16px;

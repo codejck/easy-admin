@@ -3,10 +3,10 @@
         <div :class="{ 'el-overlay': appendToBody }" v-if="visible" @click="clickOverlay">
             <div class="captcha-slide" onselectstart="return false">
                 <h3 class="captcha-header">
-                    {{ $t('toolTip.validate') }}
+                    {{ $t('common.validate') }}
                     <div class="flex">
                         <easy-button i="refresh" link v-on-click-rotate v-prevent-reclick="500" 
-                            :title="$t('toolTip.refresh')" @click="refresh" />
+                            :title="$t('common.refresh')" @click="refresh" />
                     </div>
                 </h3>
                 <div class="loading" v-if="loading">{{ $t('message.loading') }}</div>

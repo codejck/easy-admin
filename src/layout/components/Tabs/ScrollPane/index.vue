@@ -24,27 +24,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .scroll-container {
+.scroll-container {
+  height: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+
+  :deep(.el-scrollbar__bar) {
+    bottom: 0;
+  }
+
+  :deep(.el-scrollbar__wrap) {
     height: inherit;
-    white-space: nowrap;
-    overflow: hidden;
-    position: relative;
 
-    ::v-deep {
-      .el-scrollbar__bar {
-        bottom: 0;
-      }
-
-      .el-scrollbar__wrap {
-        height: inherit;
-
-        .el-scrollbar__view {
-          height: inherit;
-          display: flex;
-          align-items: end;
-          gap: 4px;
-        }
-      }
+    .el-scrollbar__view {
+      height: inherit;
+      display: flex;
+      align-items: end;
+      gap: 4px;
     }
   }
+}
 </style>

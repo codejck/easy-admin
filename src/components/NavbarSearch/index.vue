@@ -27,8 +27,8 @@ export default {
   computed: { ...mapState(useRouteStore, ["listRoutes"]) },
   created() {
     let searchPool = this.listRoutes.map(({ meta, path, query }) => {
-      return { 
-        title: meta.title.map(t => this.$t(`route.${t}`)).join(" > "),
+      return {
+        title: meta.title.join(" > "),
         path, query
       }
     })
@@ -72,70 +72,70 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .navbar-search {
-    font-size: 0 !important;
+.navbar-search {
+  font-size: 0 !important;
 
-    .navbar-search-icon {
-      width: 1em;
-      height: 1em;
-      color: var(--navbar-icon-fill-color);
-      overflow: hidden;
-      font-size: 18px;
-      vertical-align: middle;
-      cursor: pointer;
-    }
+  .navbar-search-icon {
+    width: 1em;
+    height: 1em;
+    color: var(--navbar-icon-fill-color);
+    overflow: hidden;
+    font-size: 18px;
+    vertical-align: middle;
+    cursor: pointer;
+  }
 
-    .navbar-search-select {
-      font-size: 18px;
-      transition: width 0.2s;
-      width: 0;
-      overflow: hidden;
-      background: transparent;
+  .navbar-search-select {
+    font-size: 18px;
+    transition: width 0.2s;
+    width: 0;
+    overflow: hidden;
+    background: transparent;
+    border-radius: 0;
+    display: inline-block;
+    vertical-align: middle;
+    --el-border-color: var(--el-color-info-light-3);
+
+    :deep(input) {
       border-radius: 0;
-      display: inline-block;
+      border: 0;
+      padding-left: 0;
+      padding-right: 0;
+      box-shadow: none !important;
+      border-bottom: 1px solid #d9d9d9;
       vertical-align: middle;
-      --el-border-color: var(--el-color-info-light-3);
-
-      ::v-deep {
-        input {
-          border-radius: 0;
-          border: 0;
-          padding-left: 0;
-          padding-right: 0;
-          box-shadow: none !important;
-          border-bottom: 1px solid #d9d9d9;
-          vertical-align: middle;
-        }
-
-        .el-select__wrapper {
-          background: transparent;
-        }
-      }
     }
 
-    &.show {
-      .navbar-search-select {
-        width: 210px;
-        margin-left: 10px;
-      }
+    :deep(.el-select__wrapper) {
+      background-color: transparent;
+    }
+  }
+
+  &.show {
+    .navbar-search-select {
+      width: 210px;
+      margin-left: 10px;
+    }
+  }
+
+  &:not(.show) {
+    .navbar-search-icon:hover {
+      animation: expand 0.6s forwards;
     }
 
-    &:not(.show) {
-      .navbar-search-icon:hover {
-        animation: expand 0.6s forwards;
+    @keyframes expand {
+      0% {
+        transform: scale(1);
       }
 
-      @keyframes expand {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.1);
-        }
-        100% {
-          transform: scale(1);
-        }
+      50% {
+        transform: scale(1.1);
+      }
+
+      100% {
+        transform: scale(1);
       }
     }
   }
+}
 </style>

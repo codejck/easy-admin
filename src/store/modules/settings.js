@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useAppStore } from '@/store/modules/app'
-import { ref, toRefs, watch } from 'vue'
+import { ref, toRefs, watch, watchEffect } from 'vue'
 import { colord } from 'colord'
 import { mixColor, fade, invert } from '@/utils/color'
 import { cloneDeep } from 'lodash'
@@ -26,15 +26,17 @@ export const useSettingsStore = defineStore('settings', () => {
         switchMode(mode, !appStore.showSettings)
     }, { immediate: true })
 
-    // 监听 theme
-    watch(() => settings.value.theme, (theme) => {
-        document.head.appendChild(createStyle(theme))
-    }, { immediate: true, deep: true })
-
     // 监听 grey
     watch(() => settings.value.grey, (grey) => {
         document.documentElement.classList[grey ? 'add' : 'remove']('html-grey')
-    }, { immediate: true, deep: true })
+    }, { immediate: true })
+
+    // 设置 css 变量
+    watchEffect(() => {
+        let height = !appStore.tabFullscreen * settings.value.headerHeight + settings.value.showTabs * settings.value.tabsHeight
+        let mainHeight = `calc(100vh - ${height}px)`
+        appendStyle('system-vars', createStyleStr(settings.value.theme, mainHeight))
+    })
 
     return {
         ...toRefs(settings.value),
@@ -56,15 +58,14 @@ export const useSettingsStore = defineStore('settings', () => {
     }
 })
 
-function createStyle(theme) {
-    const styleId = 'theme-vars'
+function appendStyle(styleId, content) {
     const style = document.querySelector(`#${styleId}`) || document.createElement('style')
     style.id = styleId
-    style.textContent = createStyleStr(theme)
-    return style
+    style.textContent = content
+    document.head.appendChild(style)
 }
 
-function createStyleStr(theme) {
+function createStyleStr(theme, mainHeight) {
     let colorTypes = ['primary', 'success', 'info', 'warning', 'danger']
     let baseColor = { 'light': '#ffffff', 'dark': '#0a0a0a' }
     let primaryHsl = colord(theme.primary).toHsl()
@@ -74,6 +75,7 @@ function createStyleStr(theme) {
 
     return `
         html {
+            --main-height: ${mainHeight};
             --el-color-primary-h: ${primaryHsl.h};
             --el-color-primary-s: ${primaryHsl.s};
             --el-color-primary-l: ${primaryHsl.l};

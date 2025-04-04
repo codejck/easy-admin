@@ -41,5 +41,28 @@ v1.1.0  优化了IconSelect组件
 v1.1.1  更换了所有系统图标
 v1.1.1  升级了SvgIcon组件
 v1.1.1  修改了 search.svg
-v1.1.1  根目录添加了CHANGELOG.md文件
+v1.1.1  根目录添加了 CHANGELOG.md 文件
+v1.1.1  修改了 route.meta.title 的值
+v1.1.1  删除了 router 中的 user 路由
+v1.1.1  菜单管理添加了拖拽按钮
+v1.1.2  添加了table插件
+v1.1.2  升级了EasyTable组件
+v1.1.3  RightToolbar 组件改名为 TableToolbar
+v1.1.3  自动读取更新日志文件内容
+v1.1.3  删除了table插件
+v1.1.3  utils 添加 print.js
+v1.1.3  mock 接口支持异步函数了
+v1.1.3  mock 新增 timeout 配置
+v1.1.3  更换了状态码的插画
+v1.1.3  删除了代码生成模块
+v1.1.3  全局添加了 --mian-height 变量
+v1.1.4  系统工具添加了表单设计模块
+v1.1.4  添加了SlotRenderer组件
+v1.1.4  优化了EasyTable组件（在模板中渲染列）
+v1.1.4  添加了EasyForm组件
+v1.1.5  修改了TableToolbar组件（改为了选项式）
+v1.1.5  添加了dict插件
+v1.1.5  消除了::v-deep编译警告
+v1.1.5  消除 __VUE_PROD_HYDRATION_MISMATCH_DETAILS__ 警告信息
+v1.1.5  添加了首加载的控制台输出
 ```

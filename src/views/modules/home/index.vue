@@ -1,5 +1,6 @@
 <template>
-  <div></div>
+  <div class="m20">
+  </div>
 </template>
 
 <i18n locale="en" src="./locales/en.json"></i18n>

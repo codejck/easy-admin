@@ -4,7 +4,7 @@ const path = require('path')
 module.exports = defineConfig({
     devServer: {
         port: 8080,
-        open: true,
+        open: false,
         setupMiddlewares: require('./mock'),
         client: {
             overlay: false
@@ -40,5 +40,15 @@ module.exports = defineConfig({
             .type('javascript/auto')
             .use('i18n')
             .loader('@intlify/vue-i18n-loader')
+        
+        // 消除 __VUE_PROD_HYDRATION_MISMATCH_DETAILS__ 警告信息
+        config.plugin('define').tap((definitions) => {
+            Object.assign(definitions[0], {
+                __VUE_OPTIONS_API__: 'true',
+                __VUE_PROD_DEVTOOLS__: 'false',
+                __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
+            })
+            return definitions
+        })
     }
 })

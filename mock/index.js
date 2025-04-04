@@ -45,8 +45,8 @@ function registerApis(app) {
     if (modules instanceof Array) {
         let mocksLength = 0
         modules.forEach(module => {
-            module.forEach(({ url, type, response }) => {
-                const mock = responseFake(url, type, response)
+            module.forEach(({ url, type, timeout, response }) => {
+                const mock = responseFake(url, type, timeout, response)
                 app[mock.type](mock.url, mock.response)
                 mocksLength++
             })
@@ -80,13 +80,15 @@ function authMiddleware(req, res, next) {
     }
 }
 
-function responseFake(url, type, respond) {
+function responseFake(url, type, timeout, respond) {
     return {
         url,
         type: type || 'get',
-        response(req, res) {
+        async response(req, res, next) {
             // console.log(chalk.magentaBright(`request invoke: ${req.path}`))
-            res.json(Mock.mock(respond instanceof Function ? respond(req, res) : respond))
+            if (typeof timeout === "number") await new Promise(resolve => setTimeout(resolve, timeout))
+            let result = respond instanceof Function ? await respond(req, res, next) : respond
+            res.json(Mock.mock(result))
         }
     }
 }

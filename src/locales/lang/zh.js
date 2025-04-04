@@ -2,6 +2,7 @@ import zh from 'element-plus/es/locale/lang/zh-cn'
 
 export default {
     ...zh,
+    dict: {},
     'system': {
         'title': 'Easy-Admin',
         'copyright': '版权所有 © 2024 Easy-Admin All Rights Reserved.',
@@ -13,6 +14,7 @@ export default {
         'systemTip': '系统提示',
         'backHome': '返回首页',
         'relogin': '重新登录',
+        'logout': '退出登录',
         'confirm': '确定',
         'cancel': '取消',
         'search': '搜索',
@@ -22,19 +24,16 @@ export default {
         'delete': '删除',
         'export': '导出',
         'update': '修改',
-        'drag': '拖拽'
-    },
-    'toolTip': {
+        'drag': '拖拽',
+        'operation': '操作',
+        'refresh': '刷新',
         'expand': '展开',
         'collapse': '折叠',
         'fullscreen': '全屏',
         'exitFullscreen': '退出全屏',
-        'showSearchBar': '显示搜索栏',
-        'hiddenSearchBar': '隐藏搜索栏',
-        'columnSetting': '列设置',
-        'print': '打印',
-        'refresh': '刷新',
-        'validate': '请完成安全验证'
+        'validate': '请完成安全验证',
+        'userCenter': '个人中心',
+        'configuration': '系统配置',
     },
     'placeholder': {
         "captcha": "请输入验证码",
@@ -48,9 +47,6 @@ export default {
         'closeLeft': '关闭左侧',
         'closeRight': '关闭右侧',
         'closeAll': '全部关闭',
-        'userCenter': '个人中心',
-        'configuration': '系统配置',
-        'logout': '退出登录',
         'save': '保存配置',
         'reset': '恢复默认',
     },
@@ -79,12 +75,12 @@ export default {
         'unsupportFullscreen': '你的浏览器不支持全屏',
         'saving': '正在保存到本地，请稍候...',
         'reseting': '正在清除设置，请稍候...',
-        'error': {
-            '401': '认证失败，无法访问系统资源',
-            '403': '当前操作没有权限',
-            '404': '访问资源不存在',
-            'default': '系统未知错误'
-        }
+    },
+    'state': {
+        '401': '认证失败，无法访问系统资源',
+        '403': '当前操作没有权限',
+        '404': '访问资源不存在',
+        'default': '系统未知错误'
     },
     'settings': {
         'title': {
@@ -220,25 +216,5 @@ export default {
                 }
             }
         }
-    },
-    'route': {
-        'home': '首页',
-        'document': '文档',
-        'element': 'Element-Plus',
-        'pinia': 'Pinia',
-        'vue': 'Vue',
-        'components': '组件',
-        'dialog': '弹窗',
-        'auth': '权限管理',
-        'menu': '菜单管理',
-        'role': '角色管理',
-        'error': '异常页',
-        '401': '401',
-        '404': '404',
-        'system': '系统管理',
-        'systemTool': '系统工具',
-        'gen': '代码生成',
-        'user': '个人中心',
-        'about': '关于',
     }
 }

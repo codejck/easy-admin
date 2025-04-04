@@ -22,7 +22,10 @@ export function uploadAvatar(data) {
     return request({
         url: '/uploadAvatar',
         method: 'post',
-        data: data
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        data
     })
 }
 
