@@ -3,11 +3,11 @@
     <el-scrollbar style="height:calc(100% - 52.8px)">
       <el-collapse>
         <el-collapse-item :title="$t('settings.title.system')">
-          <LayoutSelect v-model="layout" :options="Object.keys(subTitle.layout.options)" />
+          <layout-select v-model="layout" :options="Object.keys(subTitle.layout.options)" />
           <br>
           <setting-item type="el-segmented" title="mode" v-model="mode" :options="Object.keys(subTitle.mode.options)">
             <template #default="{ item }">
-              <svg-icon :icon="`${item}`" />
+              <svg-icon :icon="`${{ light: 'light', dark: 'dark', auto: 'mode-auto' }[item]}`" />
             </template>
           </setting-item>
           <setting-item type="el-select" title="language" v-model="language"
@@ -27,6 +27,7 @@
           <setting-item type="el-switch" title="dynamicTitle" v-model="dynamicTitle" />
           <setting-item type="el-switch" title="watermark" v-model="watermark" />
           <setting-item type="el-switch" title="grey" v-model="grey" />
+          <setting-item type="el-switch" title="colorWeak" v-model="colorWeak" />
         </el-collapse-item>
         <el-collapse-item :title="$t('settings.title.theme')">
           <setting-item type="easy-color-picker" title="theme_primary" v-model="theme.primary" />
@@ -36,8 +37,7 @@
           <setting-item type="easy-color-picker" title="theme_danger" v-model="theme.danger" />
         </el-collapse-item>
         <el-collapse-item :title="$t('settings.title.navbar')">
-          <setting-item type="el-input-number" title="headerHeight" v-model="headerHeight" :min="40" :max="80"
-            :step="5" />
+          <setting-item type="el-input-number" title="headerHeight" v-model="headerHeight" :min="40" :max="80" :step="5" />
           <setting-item type="el-switch" title="fixedHeader" v-model="fixedHeader" tip />
           <setting-item type="el-switch" title="showBreadcrumb" v-model="showBreadcrumb" />
           <setting-item type="el-switch" title="showBreadcrumbIcon" v-model="showBreadcrumbIcon" />
@@ -57,8 +57,7 @@
           <setting-item type="el-switch" title="showTabs" v-model="showTabs" />
           <setting-item type="el-switch" title="showTabsIcon" v-model="showTabsIcon" />
           <setting-item type="el-input-number" title="tabsHeight" v-model="tabsHeight" :min="30" :max="60" :step="2" />
-          <setting-item type="el-select" title="tabsStyle" v-model="tabsStyle"
-            :placeholder="subTitle.tabsStyle.placeholder">
+          <setting-item type="el-select" title="tabsStyle" v-model="tabsStyle" :placeholder="subTitle.tabsStyle.placeholder">
             <template #prefix>
               <svg-icon icon="tag" />
             </template>
@@ -84,8 +83,8 @@
       </el-collapse>
     </el-scrollbar>
     <div class="footer">
-      <easy-button type="primary" i="save" :t="$t('operation.save')" plain v-on-click-rotate @click="save" />
-      <easy-button i="refresh" :t="$t('operation.reset')" plain v-on-click-rotate @click="reset" />
+      <easy-button type="primary" i="save" t="operation.save" plain v-on-click-rotate @click="save" />
+      <easy-button i="refresh" t="operation.reset" plain v-on-click-rotate @click="reset" />
     </div>
   </el-drawer>
 </template>

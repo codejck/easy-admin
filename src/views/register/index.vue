@@ -1,6 +1,10 @@
 <template>
   <div class="register">
-    <span class="copyright">{{ $t('system.copyright') }}</span>
+    <span class="copyright">
+      {{ $t('system.copyright') }}
+      <el-divider style="border-color: currentColor" direction="vertical" />
+      {{ $t('system.icp')  }}
+    </span>
   </div>
 </template>
 
@@ -25,7 +29,7 @@ export default {
   .register {
     width: 100vw;
     height: 100vh;
-    background-image: url("@/assets/images/login-background.jpg");
+    background-image: url("@/assets/img/login-background.jpg");
     background-size: cover;
     position: relative;
 

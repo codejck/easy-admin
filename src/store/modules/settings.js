@@ -3,17 +3,16 @@ import { useAppStore } from '@/store/modules/app'
 import { ref, toRefs, watch, watchEffect } from 'vue'
 import { colord } from 'colord'
 import { mixColor, fade, invert } from '@/utils/color'
-import { cloneDeep } from 'lodash'
+import { cloneDeep, mapValues } from 'lodash'
 import { local } from '@/plugins/modules/cache'
 import defaultSettings from '@/settings'
 import i18n from '@/locales'
 
 export const useSettingsStore = defineStore('settings', () => {
+    const media = matchMedia('(prefers-color-scheme: light)')
     const storageSettings = local.getItem('system-settings')
-    const settings = ref(cloneDeep(Object.keys(defaultSettings).reduce((acc, key) => {
-        acc[key] = storageSettings?.[key] ?? defaultSettings[key]
-        return acc
-    }, {})))
+    const settings = ref(cloneDeep(mapValues(defaultSettings, (val, key) => storageSettings?.[key] ?? val)))
+    const light = ref(media.matches)
 
     // 监听 language
     watch(() => settings.value.language, (language) => {
@@ -21,30 +20,49 @@ export const useSettingsStore = defineStore('settings', () => {
     }, { immediate: true })
 
     // 监听 mode
-    let appStore = useAppStore()
     watch(() => settings.value.mode, (mode) => {
-        switchMode(mode, !appStore.showSettings)
+        light.value = mode === 'auto' ? media.matches : mode === 'light'
+    }, { immediate: true })
+
+    // 监听 prefers-mode
+    media.addEventListener('change', () => {
+        light.value = settings.value.mode === 'auto' ? media.matches : settings.value.mode === 'light'
+    })
+
+    // 监听 light
+    watch(() => light.value, (light) => {
+        document.documentElement.className = light ? 'light' : 'dark'
     }, { immediate: true })
 
     // 监听 grey
     watch(() => settings.value.grey, (grey) => {
-        document.documentElement.classList[grey ? 'add' : 'remove']('html-grey')
+        document.documentElement.classList[grey ? 'add' : 'remove']('grey')
+    }, { immediate: true })
+
+    // 监听 colorWeak
+    watch(() => settings.value.colorWeak, (colorWeak) => {
+        document.documentElement.classList[colorWeak ? 'add' : 'remove']('color-weak')
     }, { immediate: true })
 
     // 设置 css 变量
+    let appStore = useAppStore()
     watchEffect(() => {
-        let height = !appStore.tabFullscreen * settings.value.headerHeight + settings.value.showTabs * settings.value.tabsHeight
-        let mainHeight = `calc(100vh - ${height}px)`
+        let headerHeight = !appStore.tabFullscreen * settings.value.headerHeight
+        let tabsHeight = settings.value.showTabs * settings.value.tabsHeight
+        let mainHeight = `calc(100vh - ${headerHeight + tabsHeight}px)`
         appendStyle('system-vars', createStyleStr(settings.value.theme, mainHeight))
     })
 
     return {
+        light,
         ...toRefs(settings.value),
+        // 保存配置
         saveSettings() {
             local.setItem("system-settings", this.$state)
         },
+        // 恢复默认
         resetSettings() {
-            local.remove("system-settings")
+            local.removeItem("system-settings")
             this.$patch(state => {
                 for (const key in defaultSettings) {
                     state[key] = cloneDeep(defaultSettings[key])
@@ -81,9 +99,11 @@ function createStyleStr(theme, mainHeight) {
             --el-color-primary-l: ${primaryHsl.l};
         }
         html.light {
+            --light: 1;
             ${lightStyles.join(';')}
         }
         html.dark {
+            --light: 0;
             ${darkStyles.join(';')}
         }
     `
@@ -105,31 +125,4 @@ function createCssVars(color, baseColor, colorType) {
             return `--el-color-${colorType}${key}: ${mixColor(fade(color, val), baseColor).toHslString()}`
         }
     })
-}
-
-function switchMode(mode, animate = true) {
-    if (animate) {
-        document.startViewTransition(() => {
-            document.documentElement.className = mode
-        }).ready.then(() => {
-            // 添加切换动画
-            let modeSwitch = document.getElementById('mode-switch')
-            if (modeSwitch) {
-                let x = modeSwitch.getBoundingClientRect()['x']
-                let y = modeSwitch.getBoundingClientRect()['y']
-                let r = Math.hypot(Math.max(window.innerWidth - x, x), Math.max(window.innerHeight - y, y))
-                let clipPath = [`circle(0% at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`]
-                document.documentElement.animate({
-                    clipPath: mode === 'light' ? clipPath : clipPath.reverse()
-                }, {
-                    duration: 500,
-                    pseudoElement: mode === 'light'
-                        ? '::view-transition-new(root)'
-                        : '::view-transition-old(root)'
-                })
-            }
-        })
-    } else {
-        document.documentElement.className = mode
-    }
 }

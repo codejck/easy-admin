@@ -1,10 +1,11 @@
-import en from 'element-plus/es/locale/lang/en'
+import en from 'element-plus/dist/locale/en.mjs'
 
 export default {
     ...en,
     dict: {},
     'system': {
         'title': 'Easy-Admin',
+        'icp': 'Yue ICP Bei 2025413388 Hao',
         'copyright': 'Copyright © 2024 Easy-Admin All Rights Reserved.',
         'watermark': 'Easy-Admin',
     },
@@ -97,6 +98,7 @@ export default {
                 'options': {
                     'light': 'Light',
                     'dark': 'Dark',
+                    'auto': 'Auto',
                 }
             },
             'layout': {
@@ -134,6 +136,9 @@ export default {
             },
             'grey': {
                 'title': 'Grey'
+            },
+            'colorWeak': {
+                'title': 'Color Weak'
             },
             'headerHeight': {
                 'title': 'Header Height'

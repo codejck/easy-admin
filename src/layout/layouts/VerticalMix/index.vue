@@ -27,7 +27,8 @@
                         <div class="sidebar-submenu-title">
                             <h2 style="color: var(--el-color-primary)">{{ $t('system.title') }}</h2>
                             <svg-icon
-                                :icon="fixSubMenu ? 'pin-fixed' : 'pin'" 
+                                :icon="fixSubMenu ? 'pin-fixed' : 'pin'"
+                                :style="{ color: fixSubMenu ? 'var(--el-color-primary)' : '#808080' }"
                                 :class="{ 'primary-color': fixSubMenu }"
                                 @click="fixSubMenu = !fixSubMenu" />
                         </div>
@@ -148,6 +149,7 @@ export default {
 
                 span {
                     line-height: normal;
+                    font-size: smaller;
                 }
             }
         }
@@ -195,7 +197,6 @@ export default {
                     }
 
                     svg {
-                        opacity: 0.6;
                         cursor: pointer;
 
                         &:hover {

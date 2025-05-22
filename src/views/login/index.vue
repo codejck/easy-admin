@@ -29,13 +29,17 @@
           {{ $t('register') }}
         </router-link>
       </div>
-      <easy-button :t="$t(loading ? 'logging' : 'login')" style="width:100%" type="primary" :loading="loading"
-        auto-insert-space @click.native.prevent="validate" />
+      <easy-button style="width:100%" type="primary" :t="loading ? 'logging' : 'login'" :loading="loading" auto-insert-space 
+        @click.native.prevent="validate" />
     </el-form>
     <div class="login-tools">
       <LangSelect />
     </div>
-    <span class="copyright">{{ $t('system.copyright') }}</span>
+    <span class="copyright">
+      {{ $t('system.copyright') }}
+      <el-divider style="border-color: currentColor" direction="vertical" />
+      {{ $t('system.icp')  }}
+    </span>
   </div>
 </template>
 
@@ -89,9 +93,9 @@ export default {
       let password = Cookies.get("password")
       let rememberMe = Cookies.get('rememberMe')
       this.loginForm = {
-        username: username === undefined ? this.loginForm.username : username,
+        username: username ?? this.loginForm.username,
         password: password === undefined ? this.loginForm.password : decrypt(password),
-        rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
+        rememberMe: Boolean(rememberMe)
       }
     },
     validate() {
@@ -140,7 +144,7 @@ export default {
 
   &::before {
     content: '';
-    background-image: url("@/assets/images/login-background.jpg");
+    background-image: url("@/assets/img/login-background.jpg");
     background-size: cover;
     filter: hue-rotate(calc((var(--el-color-primary-h) - 214) * 1deg));
     position: fixed;

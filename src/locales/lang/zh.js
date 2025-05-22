@@ -1,10 +1,11 @@
-import zh from 'element-plus/es/locale/lang/zh-cn'
+import zh from 'element-plus/dist/locale/zh-cn.mjs'
 
 export default {
     ...zh,
     dict: {},
     'system': {
         'title': 'Easy-Admin',
+        'icp': '备案号：粤ICP备2025413388号',
         'copyright': '版权所有 © 2024 Easy-Admin All Rights Reserved.',
         'watermark': 'Easy-Admin',
     },
@@ -97,6 +98,7 @@ export default {
                 'options': {
                     'light': '白天',
                     'dark': '黑夜',
+                    'auto': '自动'
                 }
             },
             'layout': {
@@ -134,6 +136,9 @@ export default {
             },
             'grey': {
                 'title': '灰色模式'
+            },
+            'colorWeak': {
+                'title': '色弱模式'
             },
             'headerHeight': {
                 'title': '头部高度'

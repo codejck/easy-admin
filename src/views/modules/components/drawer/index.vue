@@ -7,7 +7,7 @@
 
 <script>
 export default {
-    name: 'Role'
+    name: 'Drawer'
 }
 </script>
 

@@ -1,7 +1,7 @@
 export default {
 
     // 浅色模式
-    mode: 'light',
+    mode: 'auto',
 
     // 系统布局
     layout: 'vertical',
@@ -20,6 +20,9 @@ export default {
 
     // 是否开启灰色模式
     grey: false,
+
+    // 是否开启色弱模式
+    colorWeak: false,
 
     // 头部高度
     headerHeight: 50,
@@ -58,7 +61,7 @@ export default {
     sidebarStyle: 'card',
 
     // 深色侧边栏
-    darkSidebar: false,
+    darkSidebar: true,
 
     // 是否只保持一个子菜单展开
     uniqueOpened: true,
@@ -76,8 +79,8 @@ export default {
     navToolbar: [
         { is: 'NavbarSearch', icon: 'search', show: true },
         { is: 'Screenfull', icon: 'fullscreen', show: true },
-        { is: 'DataScreen', icon: 'screen', show: false },
-        { is: 'LangSelect', icon: 'lang', show: true },
+        { is: 'DataScreen', icon: 'screen', show: true },
+        { is: 'LangSelect', icon: 'translate', show: true },
         { is: 'ModeSwitch', icon: 'light', show: true },
     ]
 }

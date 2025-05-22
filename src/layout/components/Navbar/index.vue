@@ -12,7 +12,7 @@
         <template #default="{ src, username }">
           <div class="avatar-wrapper">
             <el-avatar :size="28" :src="src" alt="avatar">
-              <img src="@/assets/images/default-avatar.png" />
+              <img src="@/assets/img/default-avatar.png" />
             </el-avatar>
             <span>{{ username }}</span>
             <svg-icon icon="R" />
@@ -72,7 +72,8 @@ export default {
 
       .el-divider {
         height: 22px;
-        margin: 0 -6px;
+        margin-left: -2px;
+        margin-right: -6px;
         opacity: 0.4;
         border-left-width: 1px;
         border-color: var(--navbar-icon-fill-color);

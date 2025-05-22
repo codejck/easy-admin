@@ -60,6 +60,7 @@ export default {
     }
 
     .el-segmented {
+        width: 100px;
         padding: 4px;
 
         .is-selected svg {
@@ -67,7 +68,6 @@ export default {
         }
 
         svg {
-            width: 32px;
             color: var(--el-segmented-color)
         }
     }
